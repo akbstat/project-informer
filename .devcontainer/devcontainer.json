@@ -1,0 +1,25 @@
+// .devcontainer/devcontainer.json
+{
+    "name": "project-informer-dev",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.vscode-typescript-next",
+                "bradlc.vscode-tailwindcss",
+                "ms-vscode.vscode-json",
+                "esbenp.prettier-vscode"
+                // 可根据需要添加其他扩展
+            ],
+            "settings": {
+                "terminal.integrated.shell.linux": "/bin/bash"
+            }
+        }
+    },
+    "forwardPorts": [
+        3000
+    ],
+    "postCreateCommand": "pnpm install"
+}

@@ -1,0 +1,7 @@
+.docs
+.next
+.vscode
+.env
+**/*.sql
+*.README
+node_modules

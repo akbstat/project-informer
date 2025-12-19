@@ -1,0 +1,15 @@
+services:
+  app:
+    image: akesosp/project-informer:v0.1.0
+    ports:
+      - "4000:4000"
+    environment:
+      - DATABASE_URL=postgresql://admin:akesobio@postgres:5432/project_informer
+      - MODEL_API_KEY=gpustack_f6a09fbc19ef8bd6_b86e9caf07e662967e03398a3465b828
+      - MODEL=qwen3-14b-gguf
+      - MODEL_URL=http://10.10.2.251:8713/v1/
+    networks:
+      - postgres_postgres_net
+networks:
+  postgres_postgres_net:
+    external: true
