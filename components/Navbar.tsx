@@ -6,6 +6,7 @@ import { useSelectionContext } from "./contexts";
 import { Version } from "@/data/repository/entity";
 import StyleConfiguration from "./StyleConfiguration";
 import UpdateModeSelection from "./UpdateModeSelection";
+import { apiFetch } from "@/helper/fetch";
 
 export default function Navbar({ className }: { className: string }) {
     const { versionId, setVersionId } = useSelectionContext();
@@ -13,7 +14,7 @@ export default function Navbar({ className }: { className: string }) {
     const selectRef = React.useRef<HTMLDivElement>(null);
 
     const listVersions = React.useCallback(async () => {
-        const reply = await fetch("/api/version");
+        const reply = await apiFetch("/api/version");
         const data: Version[] = (await reply.json()).data;
         data.sort((x, y) => x.name > y.name ? -1 : 1)
         setVersions(data);

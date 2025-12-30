@@ -8,6 +8,7 @@ import Message from "./Message";
 import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural';
 import React from "react";
 import { mergeFunctionToolCall } from "@/helper/converter";
+import { apiFetch } from "@/helper/fetch";
 
 export default function Chat() {
     const [message, setMessage] = React.useState("");
@@ -35,7 +36,7 @@ export default function Chat() {
         const result = [];
         for (const tool of tools) {
             setCallingTool(tool.function.name);
-            const reply = await fetch("/api/chat/tool", {
+            const reply = await apiFetch("/api/chat/tool", {
                 method: "POST",
                 body: JSON.stringify(tool),
             });
@@ -46,7 +47,7 @@ export default function Chat() {
         return result;
     }
     const runChatCompletion = async (currentHistories: ChatCompletionMessageParam[]) => {
-        const response = await fetch("/api/chat", {
+        const response = await apiFetch("/api/chat", {
             method: "POST",
             body: JSON.stringify({ data: currentHistories }),
         });

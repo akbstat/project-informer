@@ -12,3 +12,15 @@ export interface Project {
     descriptions: Content[]
 }
 
+export interface CreateProjectRequest {
+    name: string;
+    leaders: string;
+}
+
+
+
+export interface SaveProjectRequest {
+    name: string,
+    blindLeaders: string[],
+    unblindLeaders: string[]
+}

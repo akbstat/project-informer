@@ -5,6 +5,7 @@ import React from "react";
 import { Box, List, ListItem, ListItemButton, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { Product } from "@/data/repository/entity";
+import { apiFetch } from "@/helper/fetch";
 
 export default function MenuList({ className }: { className: string }) {
     const { push } = useRouter();
@@ -16,7 +17,7 @@ export default function MenuList({ className }: { className: string }) {
             return;
         }
         const fetchData = async () => {
-            const reply = await fetch(`/api/product?version=${versionId}`);
+            const reply = await apiFetch(`/api/product?version=${versionId}`);
             const p: Product[] = (await reply.json()).data;
             p.sort((x, y) => x.name < y.name ? -1 : 1);
             setProducts(p);

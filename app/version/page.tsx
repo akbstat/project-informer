@@ -1,5 +1,6 @@
 "use client";
 
+import { apiFetch } from "@/helper/fetch";
 import { getVersionObject } from "@/helper/version";
 import { AuthParam } from "@/object/auth";
 import { Version } from "@/object/version";
@@ -45,7 +46,7 @@ export default function CreateVersion() {
     ;
     const sumbit = async () => {
         setLoading(true);
-        await fetch('/api/sync', {
+        await apiFetch('/api/sync', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

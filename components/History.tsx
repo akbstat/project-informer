@@ -7,12 +7,14 @@ import { useSelectionContext } from "./contexts";
 import { ProjectHistory } from "@/object/detail";
 import { contentsToProjectHistories } from "@/helper/converter";
 import { useRouter } from "next/navigation";
+import LeaderTag from "./LeaderTag";
+import { apiFetch } from "@/helper/fetch";
 
 export default function History({ project }: { project: number }) {
     const [history, setHistory] = React.useState<ProjectHistory | undefined>(undefined);
     const router = useRouter();
     const listHistores = React.useCallback(async () => {
-        const reply = await fetch(`/api/history?project=${project}`);
+        const reply = await apiFetch(`/api/history?project=${project}`);
         const jsonData: { data: Content[] } = await reply.json();
         setHistory(contentsToProjectHistories(jsonData.data)[0]);
     }, [project]);
@@ -32,12 +34,15 @@ export default function History({ project }: { project: number }) {
             {
                 history ?
                     (<main style={{ marginTop: "20px" }}>
-                        <Typography
-                            onClick={() => { router.back() }}
-                            color="primary.main"
-                            sx={{ fontSize: fontSize(30), marginBottom: "1%", cursor: "pointer" }}>
-                            {`${history.name}(${history.leaders})`}
-                        </Typography>
+                        <Stack direction="row" spacing={1}>
+                            <Typography
+                                onClick={() => { router.back() }}
+                                color="primary.main"
+                                sx={{ fontSize: fontSize(30), marginBottom: "1%", cursor: "pointer" }}>
+                                {`${history.name}`}
+                            </Typography>
+                            <LeaderTag leader={history.leaders} fontsizeTimes={fontsizeTimes} />
+                        </Stack>
                         <Box
                             sx={{
                                 padding: "5px",

@@ -100,7 +100,12 @@ export class ProjectSyncer {
             const projectName = row.getCell(1).toString();
             const status = row.getCell(2).toString();
             const ongoing = isOngoing(status);
-            const owners = row.getCell(4).toString();
+            const ownerList = [];
+            // blind owner
+            ownerList.push(row.getCell(4).toString());
+            // unblind owner
+            ownerList.push(row.getCell(5).toString());
+            const owners = ownerList.filter(o => o.length > 0).join("|");
             if (projectName.length === 0) {
                 continue;
             }

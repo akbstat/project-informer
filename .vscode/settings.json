@@ -3,7 +3,7 @@
         {
             "ssh": "Disabled",
             "previewLimit": 50,
-            "server": "localhost",
+            "server": "host.docker.internal",
             "port": 5432,
             "driver": "PostgreSQL",
             "name": "project-informer",
